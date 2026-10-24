@@ -1,1 +1,779 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asmita Shirke | Personal Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#0B1120',
+                            900: '#030712',
+                            950: '#02040a',
+                        },
+                        electric: {
+                            400: '#38bdf8',
+                            500: '#06b6d4',
+                            600: '#0284c7',
+                        },
+                        purpleGlow: {
+                            500: '#a855f7',
+                            600: '#9333ea',
+                        }
+                    },
+                    animation: {
+                        'gradient-x': 'gradient-x 8s ease infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulse-glow 3s infinite',
+                    },
+                    keyframes: {
+                        'gradient-x': {
+                            '0%, 100%': { 'background-size': '200% 200%', 'background-position': 'left center' },
+                            '50%': { 'background-size': '200% 200%', 'background-position': 'right center' }
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: '0.6', filter: 'blur(20px)' },
+                            '50%': { opacity: '0.9', filter: 'blur(30px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom Glassmorphism Styles */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .light .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+        }
+        .glass-nav {
+            background: rgba(3, 7, 18, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .light .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        /* Gradient Border Container */
+        .gradient-border-wrap {
+            position: relative;
+            background: linear-gradient(135deg, #06b6d4, #a855f7, #3b82f6);
+            padding: 4px;
+            border-radius: 9999px;
+            animation: gradient-x 6s ease infinite;
+            background-size: 200% 200%;
+        }
+    </style>
+</head>
+<body class="bg-navy-950 text-slate-100 light:bg-slate-50 light:text-slate-800 transition-colors duration-300 min-h-screen relative overflow-x-hidden">
 
+    <!-- Background Animated Glow Spheres -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-purpleGlow-600/20 rounded-full blur-3xl animate-pulse-glow"></div>
+        <div class="absolute top-1/3 -right-40 w-96 h-96 bg-electric-500/20 rounded-full blur-3xl animate-pulse-glow" style="animation-delay: 1.5s;"></div>
+        <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl animate-pulse-glow" style="animation-delay: 3s;"></div>
+    </div>
+
+    <!-- Sticky Navigation Bar -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo / Brand -->
+            <a href="#home" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-electric-500 to-purpleGlow-600 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-electric-500/20 group-hover:scale-105 transition-transform">
+                    AS
+                </div>
+                <span class="font-bold text-xl tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 light:from-slate-900 light:to-slate-700 bg-clip-text text-transparent">
+                    Asmita<span class="text-electric-400">.</span>
+                </span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-1 lg:gap-2">
+                <a href="#home" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-slate-300 light:text-slate-600 hover:text-white light:hover:text-slate-900 hover:bg-white/5 light:hover:bg-black/5 transition-all">Home</a>
+                <a href="#about" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-slate-300 light:text-slate-600 hover:text-white light:hover:text-slate-900 hover:bg-white/5 light:hover:bg-black/5 transition-all">About Me</a>
+                <a href="#education" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-slate-300 light:text-slate-600 hover:text-white light:hover:text-slate-900 hover:bg-white/5 light:hover:bg-black/5 transition-all">Education</a>
+                <a href="#skills" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-slate-300 light:text-slate-600 hover:text-white light:hover:text-slate-900 hover:bg-white/5 light:hover:bg-black/5 transition-all">Skills</a>
+                <a href="#interests" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-slate-300 light:text-slate-600 hover:text-white light:hover:text-slate-900 hover:bg-white/5 light:hover:bg-black/5 transition-all">Interests</a>
+                <a href="#projects" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-slate-300 light:text-slate-600 hover:text-white light:hover:text-slate-900 hover:bg-white/5 light:hover:bg-black/5 transition-all">Projects</a>
+                <a href="#contact" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-slate-300 light:text-slate-600 hover:text-white light:hover:text-slate-900 hover:bg-white/5 light:hover:bg-black/5 transition-all">Contact</a>
+            </nav>
+
+            <!-- Theme Toggle & Mobile Menu Controls -->
+            <div class="flex items-center gap-3">
+                <button id="themeToggle" class="p-2.5 rounded-xl glass-card text-slate-300 light:text-slate-700 hover:text-white light:hover:text-black transition-colors" aria-label="Toggle Theme">
+                    <i data-lucide="sun" class="w-5 h-5 hidden dark:block text-amber-400"></i>
+                    <i data-lucide="moon" class="w-5 h-5 block dark:hidden text-indigo-600"></i>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden p-2.5 rounded-xl glass-card text-slate-300 light:text-slate-700 hover:text-white" aria-label="Toggle Menu">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden glass-nav border-t border-white/10 px-4 pt-2 pb-6 space-y-2">
+            <a href="#home" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-200 light:text-slate-800 hover:bg-white/10">Home</a>
+            <a href="#about" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-200 light:text-slate-800 hover:bg-white/10">About Me</a>
+            <a href="#education" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-200 light:text-slate-800 hover:bg-white/10">Education</a>
+            <a href="#skills" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-200 light:text-slate-800 hover:bg-white/10">Skills</a>
+            <a href="#interests" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-200 light:text-slate-800 hover:bg-white/10">Interests</a>
+            <a href="#projects" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-200 light:text-slate-800 hover:bg-white/10">Projects</a>
+            <a href="#contact" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-200 light:text-slate-800 hover:bg-white/10">Contact</a>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="relative z-10 pt-20">
+
+        <!-- 1. HOME / HERO SECTION -->
+        <section id="home" class="min-h-[calc(100vh-5rem)] flex items-center justify-center py-16 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Left Column: Text & CTA -->
+                <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-electric-400 text-sm font-medium border border-electric-500/30">
+                        <span>Hello, Welcome to My Portfolio! 👋</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
+                        Hi, I'm <span class="bg-gradient-to-r from-electric-400 via-purpleGlow-500 to-pink-500 bg-clip-text text-transparent">Asmita Shirke</span>
+                    </h1>
+
+                    <p class="text-lg sm:text-xl text-slate-300 light:text-slate-600 font-medium">
+                        Information Technology Student <span class="text-electric-400">|</span> Aspiring Tech Professional <span class="text-electric-400">|</span> Lifelong Learner
+                    </p>
+
+                    <p class="text-slate-400 light:text-slate-600 text-base leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        I'm Asmita Shirke, an Information Technology student at MIT Academy of Engineering in Pune, Maharashtra. I'm interested in technology, artificial intelligence, web development, and continuously learning new skills. I enjoy exploring new ideas, developing my abilities, and discovering how technology can solve real-world problems.
+                    </p>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#about" class="px-7 py-3.5 rounded-xl bg-gradient-to-r from-electric-500 to-purpleGlow-600 text-white font-semibold shadow-lg shadow-electric-500/25 hover:shadow-electric-500/40 hover:scale-105 active:scale-95 transition-all flex items-center gap-2">
+                            <span>Discover My Profile</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#contact" class="px-7 py-3.5 rounded-xl glass-card text-slate-200 light:text-slate-800 hover:bg-white/10 light:hover:bg-black/5 font-semibold hover:scale-105 active:scale-95 transition-all flex items-center gap-2">
+                            <span>Contact Me</span>
+                            <i data-lucide="mail" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+
+                    <!-- Highlight Badges -->
+                    <div class="pt-8 grid grid-cols-3 gap-3 sm:gap-4 max-w-md mx-auto lg:mx-0">
+                        <div class="p-3 rounded-xl glass-card text-center hover:border-electric-500/40 transition-colors">
+                            <i data-lucide="code-2" class="w-6 h-6 text-electric-400 mx-auto mb-1"></i>
+                            <span class="text-xs font-semibold text-slate-300 light:text-slate-700 block">IT Student</span>
+                        </div>
+                        <div class="p-3 rounded-xl glass-card text-center hover:border-purpleGlow-500/40 transition-colors">
+                            <i data-lucide="bot" class="w-6 h-6 text-purpleGlow-500 mx-auto mb-1"></i>
+                            <span class="text-xs font-semibold text-slate-300 light:text-slate-700 block">AI Enthusiast</span>
+                        </div>
+                        <div class="p-3 rounded-xl glass-card text-center hover:border-blue-500/40 transition-colors">
+                            <i data-lucide="layout" class="w-6 h-6 text-blue-400 mx-auto mb-1"></i>
+                            <span class="text-xs font-semibold text-slate-300 light:text-slate-700 block">Web Dev</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Right Column: Photo Placeholder with Upload -->
+                <div class="lg:col-span-5 flex flex-col items-center justify-center">
+                    <div class="relative group">
+                        <!-- Glow behind photo -->
+                        <div class="absolute -inset-1 bg-gradient-to-r from-electric-500 to-purpleGlow-600 rounded-full blur-xl opacity-70 group-hover:opacity-100 transition duration-500"></div>
+                        
+                        <!-- Circular Border Container -->
+                        <div class="gradient-border-wrap p-1.5 rounded-full relative">
+                            <div class="w-64 h-64 sm:w-72 sm:h-72 rounded-full overflow-hidden bg-navy-900 light:bg-slate-200 relative flex items-center justify-center border-4 border-navy-950 light:border-white">
+                                <!-- Profile Image or Avatar Placeholder -->
+                                <img id="profileImage" src="https://placehold.co/400x400/0b1120/a855f7?text=Asmita+Shirke" alt="Asmita Shirke Profile" class="w-full h-full object-cover">
+                                
+                                <!-- Overlay Trigger to Upload Custom Image -->
+                                <label for="imageUpload" class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center cursor-pointer transition-opacity duration-300 text-white p-4 text-center">
+                                    <i data-lucide="camera" class="w-8 h-8 mb-2 text-electric-400"></i>
+                                    <span class="text-xs font-semibold">Click to upload photo</span>
+                                </label>
+                                <input type="file" id="imageUpload" accept="image/*" class="hidden">
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 light:text-slate-500 mt-4 italic">Hover profile image to upload your photo</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. ABOUT ME SECTION -->
+        <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
+                    About <span class="text-electric-400">Me</span>
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-electric-500 to-purpleGlow-600 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- About Info Cards Left -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="glass-card p-6 rounded-2xl hover:border-electric-500/40 transition-all">
+                        <div class="flex items-center gap-4">
+                            <div class="p-3 rounded-xl bg-electric-500/10 text-electric-400">
+                                <i data-lucide="user" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs text-slate-400 light:text-slate-500 uppercase tracking-wider font-medium">Full Name</h4>
+                                <p class="text-base font-semibold text-slate-200 light:text-slate-800">Asmita Shirke</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl hover:border-purpleGlow-500/40 transition-all">
+                        <div class="flex items-center gap-4">
+                            <div class="p-3 rounded-xl bg-purpleGlow-500/10 text-purpleGlow-500">
+                                <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs text-slate-400 light:text-slate-500 uppercase tracking-wider font-medium">Institution</h4>
+                                <p class="text-base font-semibold text-slate-200 light:text-slate-800">MIT Academy of Engineering</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl hover:border-blue-500/40 transition-all">
+                        <div class="flex items-center gap-4">
+                            <div class="p-3 rounded-xl bg-blue-500/10 text-blue-400">
+                                <i data-lucide="map-pin" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs text-slate-400 light:text-slate-500 uppercase tracking-wider font-medium">Location</h4>
+                                <p class="text-base font-semibold text-slate-200 light:text-slate-800">Pune, Maharashtra, India</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Descriptive Text Right -->
+                <div class="lg:col-span-7 glass-card p-8 rounded-3xl relative overflow-hidden">
+                    <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-purpleGlow-600/10 rounded-full blur-2xl"></div>
+                    
+                    <h3 class="text-2xl font-bold mb-4 text-slate-100 light:text-slate-900">
+                        Passionate about Technology & Continuous Learning
+                    </h3>
+
+                    <div class="space-y-4 text-slate-300 light:text-slate-600 leading-relaxed text-base">
+                        <p>
+                            Hello! I am <strong class="text-electric-400 font-semibold">Asmita Shirke</strong>, an Information Technology student studying at the <strong>MIT Academy of Engineering</strong> in Pune, Maharashtra.
+                        </p>
+                        <p>
+                            My academic journey centers on exploring how modern technologies, Artificial Intelligence, and Web Development can be harnessed to build intelligent, practical solutions for real-world challenges.
+                        </p>
+                        <p>
+                            I bring a strong enthusiasm for continuous self-improvement, adaptability, and collaborative problem-solving. I thrive in environments where creativity meets structured thinking, and I am constantly expanding my technical and professional skillset.
+                        </p>
+                    </div>
+
+                    <!-- Soft Highlights -->
+                    <div class="mt-6 pt-6 border-t border-white/10 light:border-slate-200 flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-full bg-electric-500/10 text-electric-400 text-xs font-medium">Information Technology</span>
+                        <span class="px-3 py-1 rounded-full bg-purpleGlow-500/10 text-purpleGlow-400 text-xs font-medium">AI Exploration</span>
+                        <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-medium">Web Development</span>
+                        <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-medium">Problem Solving</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. EDUCATION SECTION -->
+        <section id="education" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
+                    My <span class="text-electric-400">Education</span>
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-electric-500 to-purpleGlow-600 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="max-w-3xl mx-auto">
+                <div class="glass-card p-8 rounded-3xl border border-white/10 hover:border-electric-500/50 transition-all duration-300 group relative">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+                        <div class="p-5 rounded-2xl bg-gradient-to-tr from-electric-500 to-purpleGlow-600 text-white shadow-lg shadow-electric-500/20 group-hover:scale-110 transition-transform">
+                            <i data-lucide="building-2" class="w-8 h-8"></i>
+                        </div>
+                        <div class="space-y-2 flex-1">
+                            <div class="inline-block px-3 py-1 rounded-full bg-electric-500/10 text-electric-400 text-xs font-semibold mb-1">
+                                Higher Education
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-100 light:text-slate-900">
+                                MIT Academy of Engineering
+                            </h3>
+                            <p class="text-lg text-purpleGlow-400 font-medium">
+                                Information Technology
+                            </p>
+                            <p class="text-sm text-slate-400 light:text-slate-500 flex items-center gap-1.5 pt-1">
+                                <i data-lucide="map-pin" class="w-4 h-4 text-slate-400"></i>
+                                Pune, Maharashtra, India
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. SKILLS AND STRENGTHS SECTION -->
+        <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
+                    Skills & <span class="text-electric-400">Strengths</span>
+                </h2>
+                <p class="text-slate-400 light:text-slate-600">Core personal and professional strengths supporting my learning journey</p>
+                <div class="w-20 h-1 bg-gradient-to-r from-electric-500 to-purpleGlow-600 mx-auto rounded-full mt-3"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Skill 1 -->
+                <div class="glass-card p-6 rounded-2xl hover:scale-[1.02] transition-all duration-300 border border-white/5 hover:border-electric-500/40 group">
+                    <div class="w-12 h-12 rounded-xl bg-electric-500/10 text-electric-400 flex items-center justify-center mb-4 group-hover:bg-electric-500 group-hover:text-white transition-colors">
+                        <i data-lucide="message-square" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-slate-100 light:text-slate-800">Communication</h3>
+                    <p class="text-slate-400 light:text-slate-600 text-sm leading-relaxed">
+                        Expressing ideas clearly and interacting effectively with others across written and verbal formats.
+                    </p>
+                </div>
+
+                <!-- Skill 2 -->
+                <div class="glass-card p-6 rounded-2xl hover:scale-[1.02] transition-all duration-300 border border-white/5 hover:border-purpleGlow-500/40 group">
+                    <div class="w-12 h-12 rounded-xl bg-purpleGlow-500/10 text-purpleGlow-500 flex items-center justify-center mb-4 group-hover:bg-purpleGlow-500 group-hover:text-white transition-colors">
+                        <i data-lucide="users" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-slate-100 light:text-slate-800">Teamwork</h3>
+                    <p class="text-slate-400 light:text-slate-600 text-sm leading-relaxed">
+                        Collaborating with others, listening actively, and contributing constructively toward shared goals.
+                    </p>
+                </div>
+
+                <!-- Skill 3 -->
+                <div class="glass-card p-6 rounded-2xl hover:scale-[1.02] transition-all duration-300 border border-white/5 hover:border-blue-500/40 group">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center mb-4 group-hover:bg-blue-500 group-hover:text-white transition-colors">
+                        <i data-lucide="lightbulb" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-slate-100 light:text-slate-800">Problem-Solving</h3>
+                    <p class="text-slate-400 light:text-slate-600 text-sm leading-relaxed">
+                        Approaching challenges thoughtfully and exploring possible structured solutions with patience.
+                    </p>
+                </div>
+
+                <!-- Skill 4 -->
+                <div class="glass-card p-6 rounded-2xl hover:scale-[1.02] transition-all duration-300 border border-white/5 hover:border-pink-500/40 group">
+                    <div class="w-12 h-12 rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center mb-4 group-hover:bg-pink-500 group-hover:text-white transition-colors">
+                        <i data-lucide="sparkles" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-slate-100 light:text-slate-800">Creativity</h3>
+                    <p class="text-slate-400 light:text-slate-600 text-sm leading-relaxed">
+                        Exploring fresh ideas and looking for innovative approaches when designing and planning tasks.
+                    </p>
+                </div>
+
+                <!-- Skill 5 -->
+                <div class="glass-card p-6 rounded-2xl hover:scale-[1.02] transition-all duration-300 border border-white/5 hover:border-emerald-500/40 group">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
+                        <i data-lucide="refresh-cw" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-slate-100 light:text-slate-800">Adaptability</h3>
+                    <p class="text-slate-400 light:text-slate-600 text-sm leading-relaxed">
+                        Being open to continuous learning and adjusting quickly to new environments and technologies.
+                    </p>
+                </div>
+
+                <!-- Skill 6 -->
+                <div class="glass-card p-6 rounded-2xl hover:scale-[1.02] transition-all duration-300 border border-white/5 hover:border-amber-500/40 group">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-4 group-hover:bg-amber-500 group-hover:text-white transition-colors">
+                        <i data-lucide="cpu" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-slate-100 light:text-slate-800">AI Tools</h3>
+                    <p class="text-slate-400 light:text-slate-600 text-sm leading-relaxed">
+                        Exploring modern AI-powered tools to support learning, web creation, and general productivity.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. INTERESTS SECTION -->
+        <section id="interests" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
+                    What I'm <span class="text-electric-400">Passionate About</span>
+                </h2>
+                <p class="text-slate-400 light:text-slate-600">Key interest areas inspiring my academic and professional growth</p>
+                <div class="w-20 h-1 bg-gradient-to-r from-electric-500 to-purpleGlow-600 mx-auto rounded-full mt-3"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Interest 1 -->
+                <div class="glass-card p-6 rounded-2xl text-center hover:border-purpleGlow-500/50 transition-all duration-300 group">
+                    <div class="w-16 h-16 rounded-2xl bg-purpleGlow-500/10 text-purpleGlow-400 mx-auto flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i data-lucide="bot" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 text-slate-100 light:text-slate-900">Artificial Intelligence</h3>
+                    <p class="text-xs text-slate-400 light:text-slate-600 leading-relaxed">
+                        Exploring how AI tools can support creativity and enhance daily productivity.
+                    </p>
+                </div>
+
+                <!-- Interest 2 -->
+                <div class="glass-card p-6 rounded-2xl text-center hover:border-electric-500/50 transition-all duration-300 group">
+                    <div class="w-16 h-16 rounded-2xl bg-electric-500/10 text-electric-400 mx-auto flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i data-lucide="globe" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 text-slate-100 light:text-slate-900">Web Development</h3>
+                    <p class="text-xs text-slate-400 light:text-slate-600 leading-relaxed">
+                        Learning how intuitive, responsive websites are designed and implemented.
+                    </p>
+                </div>
+
+                <!-- Interest 3 -->
+                <div class="glass-card p-6 rounded-2xl text-center hover:border-blue-500/50 transition-all duration-300 group">
+                    <div class="w-16 h-16 rounded-2xl bg-blue-500/10 text-blue-400 mx-auto flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i data-lucide="laptop" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 text-slate-100 light:text-slate-900">Technology</h3>
+                    <p class="text-xs text-slate-400 light:text-slate-600 leading-relaxed">
+                        Discovering new digital innovations and staying curious about modern tech trends.
+                    </p>
+                </div>
+
+                <!-- Interest 4 -->
+                <div class="glass-card p-6 rounded-2xl text-center hover:border-pink-500/50 transition-all duration-300 group">
+                    <div class="w-16 h-16 rounded-2xl bg-pink-500/10 text-pink-400 mx-auto flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i data-lucide="book-open" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 text-slate-100 light:text-slate-900">Continuous Learning</h3>
+                    <p class="text-xs text-slate-400 light:text-slate-600 leading-relaxed">
+                        Developing new skills regularly and expanding knowledge across domains.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. MY PROJECT SECTION -->
+        <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
+                    My Projects & <span class="text-electric-400">Learning Journey</span>
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-electric-500 to-purpleGlow-600 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="glass-card rounded-3xl overflow-hidden border border-white/10 hover:border-electric-500/50 transition-all duration-300 grid grid-cols-1 md:grid-cols-12">
+                    <!-- Thumbnail Side -->
+                    <div class="md:col-span-5 bg-gradient-to-br from-navy-800 to-purple-900/40 p-8 flex flex-col justify-between relative overflow-hidden min-h-[220px]">
+                        <div class="absolute -right-8 -top-8 w-32 h-32 bg-electric-500/20 rounded-full blur-xl"></div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-electric-500/20 text-electric-300 text-xs font-semibold w-fit">
+                            <i data-lucide="folder-git-2" class="w-3.5 h-3.5"></i>
+                            InAmigos Task
+                        </div>
+                        <div class="my-auto py-6">
+                            <i data-lucide="layout" class="w-12 h-12 text-electric-400 mb-2"></i>
+                            <h4 class="text-xl font-bold text-white">Portfolio Web App</h4>
+                            <p class="text-xs text-slate-300">HTML5 • Tailwind CSS • JavaScript</p>
+                        </div>
+                    </div>
+
+                    <!-- Details Side -->
+                    <div class="md:col-span-7 p-8 flex flex-col justify-between space-y-6">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-3 text-slate-100 light:text-slate-900">Personal Profile Website</h3>
+                            <p class="text-slate-300 light:text-slate-600 text-sm leading-relaxed">
+                                A personal portfolio website created as part of my learning journey with <strong>InAmigos Foundation</strong>. The website showcases my introduction, educational background, skills, interests, and contact information while helping me explore AI-powered website creation.
+                            </p>
+                        </div>
+
+                        <!-- Live Link Action Button -->
+                        <div>
+                            <!-- NOTE FOR USER: Replace '#' below with your live published website URL -->
+                            <a id="liveProjectBtn" href="#" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-electric-500 to-purpleGlow-600 text-white font-medium text-sm hover:opacity-90 transition-opacity">
+                                <span>View Live Website</span>
+                                <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
+                            <p id="urlPlaceholderNotice" class="text-xs text-amber-400 mt-2 flex items-center gap-1">
+                                <i data-lucide="info" class="w-3.5 h-3.5"></i>
+                                URL placeholder active. Link updates when published live.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Currently Exploring Card -->
+        <section class="py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="glass-card p-8 rounded-3xl text-center bg-gradient-to-r from-electric-500/10 via-purpleGlow-500/10 to-blue-500/10 border border-electric-500/20">
+                <i data-lucide="compass" class="w-10 h-10 text-electric-400 mx-auto mb-3 animate-spin" style="animation-duration: 12s;"></i>
+                <h3 class="text-xl font-bold mb-2">Currently Exploring</h3>
+                <p class="text-slate-300 light:text-slate-600 text-sm max-w-2xl mx-auto">
+                    Actively expanding knowledge in Artificial Intelligence applications, modern Web Development standards, and emerging digital technologies.
+                </p>
+            </div>
+        </section>
+
+        <!-- 7. CONTACT SECTION -->
+        <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
+                    Let's <span class="text-electric-400">Connect</span>
+                </h2>
+                <p class="text-slate-400 light:text-slate-600">Feel free to reach out for collaborations or queries</p>
+                <div class="w-20 h-1 bg-gradient-to-r from-electric-500 to-purpleGlow-600 mx-auto rounded-full mt-3"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Contact Info Left Column -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="glass-card p-6 rounded-2xl flex items-center gap-4">
+                        <div class="p-3 rounded-xl bg-electric-500/10 text-electric-400">
+                            <i data-lucide="user" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 light:text-slate-500">Name</p>
+                            <p class="text-base font-semibold text-slate-200 light:text-slate-800">Asmita Shirke</p>
+                        </div>
+                    </div>
+
+                    <!-- Clickable Email -->
+                    <a href="mailto:asmitashirke35@gmail.com" class="glass-card p-6 rounded-2xl flex items-center gap-4 hover:border-electric-500/50 transition-all block group">
+                        <div class="p-3 rounded-xl bg-purpleGlow-500/10 text-purpleGlow-400 group-hover:bg-purpleGlow-500 group-hover:text-white transition-colors">
+                            <i data-lucide="mail" class="w-6 h-6"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <p class="text-xs text-slate-400 light:text-slate-500">Email Address</p>
+                            <p class="text-base font-semibold text-electric-400 truncate">asmitashirke35@gmail.com</p>
+                        </div>
+                    </a>
+
+                    <div class="glass-card p-6 rounded-2xl flex items-center gap-4">
+                        <div class="p-3 rounded-xl bg-blue-500/10 text-blue-400">
+                            <i data-lucide="map-pin" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 light:text-slate-500">Location</p>
+                            <p class="text-base font-semibold text-slate-200 light:text-slate-800">Pune, Maharashtra, India</p>
+                        </div>
+                    </div>
+
+                    <!-- LinkedIn Editable Button -->
+                    <a id="linkedinLink" href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="glass-card p-6 rounded-2xl flex items-center gap-4 hover:border-blue-500/50 transition-all block group">
+                        <div class="p-3 rounded-xl bg-blue-600/10 text-blue-500 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            <i data-lucide="linkedin" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 light:text-slate-500">LinkedIn Profile</p>
+                            <p id="linkedinText" class="text-base font-semibold text-electric-400 flex items-center gap-1">
+                                <span>Connect on LinkedIn</span>
+                                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Contact Form Right Column -->
+                <div class="lg:col-span-7 glass-card p-8 rounded-3xl relative">
+                    <form id="contactForm" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 light:text-slate-700 mb-2">Your Name</label>
+                            <input type="text" id="formName" required placeholder="Enter your full name" class="w-full px-4 py-3 rounded-xl bg-white/5 light:bg-black/5 border border-white/10 light:border-slate-300 text-slate-100 light:text-slate-900 focus:outline-none focus:border-electric-500 transition-colors">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 light:text-slate-700 mb-2">Your Email</label>
+                            <input type="email" id="formEmail" required placeholder="Enter your email address" class="w-full px-4 py-3 rounded-xl bg-white/5 light:bg-black/5 border border-white/10 light:border-slate-300 text-slate-100 light:text-slate-900 focus:outline-none focus:border-electric-500 transition-colors">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 light:text-slate-700 mb-2">Message</label>
+                            <textarea id="formMessage" rows="4" required placeholder="Write your message here..." class="w-full px-4 py-3 rounded-xl bg-white/5 light:bg-black/5 border border-white/10 light:border-slate-300 text-slate-100 light:text-slate-900 focus:outline-none focus:border-electric-500 transition-colors"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-electric-500 to-purpleGlow-600 text-white font-semibold shadow-lg shadow-electric-500/20 hover:opacity-95 active:scale-98 transition-all flex items-center justify-center gap-2">
+                            <span>Send Message</span>
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                        </button>
+                    </form>
+
+                    <!-- Feedback Banner -->
+                    <div id="formFeedback" class="hidden mt-4 p-4 rounded-xl text-sm font-medium"></div>
+                    
+                    <p class="text-xs text-slate-500 mt-3 text-center">
+                        Note: Front-end form simulation. Connects via mailto or external API integration.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-nav border-t border-white/10 py-8 px-4 sm:px-6 lg:px-8 mt-20 relative z-10">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div>
+                <p class="text-sm text-slate-400 light:text-slate-600">
+                    © 2026 <span class="font-semibold text-slate-200 light:text-slate-800">Asmita Shirke</span>. All rights reserved.
+                </p>
+                <p class="text-xs text-slate-500 mt-1">
+                    Information Technology Student | MIT Academy of Engineering
+                </p>
+            </div>
+            <div class="text-xs text-slate-400 light:text-slate-500">
+                Personal Portfolio Task for <span class="text-electric-400 font-semibold">InAmigos Foundation</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back-to-Top Floating Button -->
+    <button id="backToTop" class="fixed bottom-6 right-6 p-3 rounded-full bg-electric-500 text-white shadow-lg shadow-electric-500/40 opacity-0 pointer-events-none transition-all duration-300 z-50 hover:scale-110 active:scale-90" aria-label="Back to Top">
+        <i data-lucide="arrow-up" class="w-5 h-5"></i>
+    </button>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // 1. Dark/Light Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Load Saved Theme Preference
+        if (localStorage.getItem('theme') === 'light') {
+            htmlElement.classList.remove('dark');
+            htmlElement.classList.add('light');
+        }
+
+        // 2. Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close Mobile Menu on Link Click
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 3. Back-to-Top Button & Sticky Header Styling on Scroll
+        const backToTopBtn = document.getElementById('backToTop');
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+                backToTopBtn.classList.add('opacity-100');
+            } else {
+                backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+                backToTopBtn.classList.remove('opacity-100');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // 4. Contact Form Validation and Simulation
+        const contactForm = document.getElementById('contactForm');
+        const formFeedback = document.getElementById('formFeedback');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('formName').value.trim();
+            const email = document.getElementById('formEmail').value.trim();
+            const message = document.getElementById('formMessage').value.trim();
+
+            if (name && email && message) {
+                formFeedback.className = "mt-4 p-4 rounded-xl text-sm font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+                formFeedback.textContent = `Thank you, ${name}! Your message has been received. (Simulated delivery)`;
+                formFeedback.classList.remove('hidden');
+                contactForm.reset();
+
+                setTimeout(() => {
+                    formFeedback.classList.add('hidden');
+                }, 5000);
+            } else {
+                formFeedback.className = "mt-4 p-4 rounded-xl text-sm font-medium bg-red-500/20 text-red-300 border border-red-500/30";
+                formFeedback.textContent = "Please complete all fields before sending.";
+                formFeedback.classList.remove('hidden');
+            }
+        });
+
+        // 5. Image Upload Preview Handler
+        const imageUpload = document.getElementById('imageUpload');
+        const profileImage = document.getElementById('profileImage');
+
+        imageUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    profileImage.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // 6. Dynamic Live Button Handler
+        const liveProjectBtn = document.getElementById('liveProjectBtn');
+        const urlPlaceholderNotice = document.getElementById('urlPlaceholderNotice');
+
+        liveProjectBtn.addEventListener('click', (e) => {
+            const href = liveProjectBtn.getAttribute('href');
+            if (href === '#' || href === '') {
+                e.preventDefault();
+                alert('Website URL placeholder active! Once published on GitHub Pages, Netlify, or Vercel, replace href="#" with your live URL.');
+            }
+        });
+    </script>
+</body>
+</html>
